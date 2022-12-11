@@ -1,5 +1,5 @@
 def parseText(stack_txt):
-    stack = [[]]*9
+    stack = []
     for s in stack_txt:
         a = 0
         if s.startswith(" 1"):
@@ -7,7 +7,12 @@ def parseText(stack_txt):
         for i in range(9):
             x = s[a:a+3]
             a += 4
-            stack[i].append(x)
+            if len(stack) <= i:
+                y = []
+                stack.append(y)
+                stack[i].append(x)
+            else:
+                stack[i].append(x)
     return stack
 
 
@@ -29,5 +34,5 @@ instructions = lines[i:]
 # print(instructions)
 
 s = parseText(stack)
-print(s[0])
+print(s)
 
