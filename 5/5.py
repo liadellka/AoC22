@@ -13,8 +13,23 @@ def parseText(stack_txt):
                 stack[i].append(x)
             else:
                 stack[i].append(x)
+    for s in stack:
+        s.reverse()
     return stack
 
+def parseInstruction(instruction):
+    text = instruction.split(" ")
+    parsed = {"amount": text[1], "from": text[3], "to": text[5]}
+    return parsed
+
+def moveStuff(stack, instructions):
+    for i in instructions:
+        new_i = parseInstruction(i)
+        num = new_i["amount"]
+        fr = new_i["from"]
+        to = new_i["to"]
+        for j in range(num):
+            # move stuff
 
 lines = []
 with open('input.txt') as f:
@@ -36,3 +51,4 @@ instructions = lines[i:]
 s = parseText(stack)
 print(s)
 
+moveStuff(s, instructions)
