@@ -20,16 +20,29 @@ def parseText(stack_txt):
 def parseInstruction(instruction):
     text = instruction.split(" ")
     parsed = {"amount": text[1], "from": text[3], "to": text[5]}
+    print(parsed)
     return parsed
 
 def moveStuff(stack, instructions):
     for i in instructions:
         new_i = parseInstruction(i)
-        num = new_i["amount"]
-        fr = new_i["from"]
-        to = new_i["to"]
+        num = int(new_i["amount"])
+        fr = int(new_i["from"])
+        to = int(new_i["to"])
+       # continue
         for j in range(num):
-            # move stuff
+            while(1):
+                x = stack[fr - 1].pop()
+                if x.startswith("["):
+                    break
+            # mam x
+            stack[to - 1].append(x)
+
+def printTop(s):
+    for x in s:
+        y = x[-1]
+        print(y[1], end='')
+
 
 lines = []
 with open('input.txt') as f:
@@ -52,3 +65,5 @@ s = parseText(stack)
 print(s)
 
 moveStuff(s, instructions)
+print("After moving:")
+printTop(s)
