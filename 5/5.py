@@ -1,3 +1,10 @@
+def removeBlank(s):
+    while(1):
+        if s[-1].startswith("["):
+            break
+        else:
+            s.pop()
+
 def parseText(stack_txt):
     stack = []
     for s in stack_txt:
@@ -15,6 +22,7 @@ def parseText(stack_txt):
                 stack[i].append(x)
     for s in stack:
         s.reverse()
+        s = removeBlank(s)
     return stack
 
 def parseInstruction(instruction):
@@ -23,20 +31,40 @@ def parseInstruction(instruction):
     print(parsed)
     return parsed
 
+def getStuff(stack, number):
+    x = []
+    y = ""
+    while(1):
+        y = stack.pop()
+        print("Y= ",y)
+        if y.startswith("["):
+            break
+            print("Here")
+    for i in range(number):
+        if y == "":
+            y = stack.pop()
+        x.append(y)
+        y = ""
+    x.reverse()
+    return x
+
 def moveStuff(stack, instructions):
     for i in instructions:
         new_i = parseInstruction(i)
         num = int(new_i["amount"])
         fr = int(new_i["from"])
         to = int(new_i["to"])
-       # continue
-        for j in range(num):
-            while(1):
-                x = stack[fr - 1].pop()
-                if x.startswith("["):
-                    break
+       # part one
+      #  for j in range(num):
+       #     while(1):
+        #        x = stack[fr - 1].pop()
+         #       if x.startswith("["):
+          #          break
             # mam x
-            stack[to - 1].append(x)
+           # stack[to - 1].append(x)
+        y = getStuff(stack[fr - 1], num)
+        for z in y:
+            stack[to - 1].append(z)
 
 def printTop(s):
     for x in s:
